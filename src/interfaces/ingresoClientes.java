@@ -7,10 +7,16 @@ package interfaces;
 
 import entidades.TipoDocumento;
 import java.awt.Toolkit;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import negocio.clientes;
+import negocio.tipoIdentificacion;
 import utilidades.validaciones;
 /**
  *
@@ -64,22 +70,26 @@ public class ingresoClientes extends javax.swing.JInternalFrame {
         }
         //this.cmbTipoIdentificacion.setModel(modeloCombo);
     }
-        public void cargarCmb()
+        public void cargarCmb() 
                 
     {
-       /*  TipoDocumento[] docsTipo=new TipoDocumento[]{
-            new TipoDocumento("Cedula",00001),
-            new TipoDocumento("Cedula",00001),
-            new TipoDocumento("Cedula",00001),
-        };*/
-    DefaultComboBoxModel model = new DefaultComboBoxModel();
-        TipoDocumento t1 = new TipoDocumento("Cedula","00001");
-        TipoDocumento t2 = new TipoDocumento("Pasaporte","00003");
-        model.addElement(t1.toString());
-        model.addElement(t2.toString());
-        cmbTipoIdentificacion.setModel(model);
-        
-   // cmbTipoIdentificacion = new JComboBox(docsTipo);
+        try {
+            tipoIdentificacion insTipo = new tipoIdentificacion();
+            
+            clientes cl = new clientes();
+            ResultSet datosCatalogo= cl.cararTipoIdentificacion("000000001");
+            DefaultComboBoxModel model = new DefaultComboBoxModel();
+            cl.cararTipoIdentificacion("000000001");
+            while(datosCatalogo.next())
+            {
+                tipoIdentificacion t1 = new tipoIdentificacion(datosCatalogo.getString("codigo_catalogo"),datosCatalogo.getString("descripcion"));
+                model.addElement(t1);
+               // insTipo.setCodigo_catalogo(cl.cararTipoIdentificacion("000000001").getString(1));
+            }
+            cmbTipoIdentificacion.setModel(model);
+               } catch (ClassNotFoundException | SQLException | InternalError | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(ingresoClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
          
     }
 
@@ -349,8 +359,8 @@ public class ingresoClientes extends javax.swing.JInternalFrame {
 
     private void cmbTipoIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoIdentificacionActionPerformed
         // TODO add your handling code here:
-         TipoDocumento instTipoAct = (TipoDocumento)cmbTipoIdentificacion.getSelectedItem();
-         JOptionPane.showInputDialog(instTipoAct.getTipoDocumento());
+        tipoIdentificacion instTipoAct = (tipoIdentificacion)this.cmbTipoIdentificacion.getSelectedItem();
+         JOptionPane.showInputDialog(instTipoAct.getCodigo_catalogo().toString());
     }//GEN-LAST:event_cmbTipoIdentificacionActionPerformed
 
     private void txtIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyTyped
@@ -429,7 +439,26 @@ public class ingresoClientes extends javax.swing.JInternalFrame {
         String validacionCampos = validarCampoObligatorios();
         if(validacionCampos.isEmpty())
         {
-            JOptionPane.showMessageDialog(rootPane, "Correcto");
+            try {
+                String[] datosEntrada = new String[9];
+                datosEntrada[0]="003";
+                tipoIdentificacion insTipoIen;
+                insTipoIen=(tipoIdentificacion)this.cmbTipoIdentificacion.getSelectedItem();
+                datosEntrada[1]=insTipoIen.getCodigo_catalogo();
+                datosEntrada[2]=this.txtIdentificacion.getText();
+                datosEntrada[3]="01";
+                datosEntrada[4]="1";
+                datosEntrada[5]=this.txtApellido.getText();
+                datosEntrada[6]=this.txtNombre.getText();
+                datosEntrada[7]=this.txttelefono.getText();
+                datosEntrada[8]=this.txtDireccion.getText();
+                
+                clientes instCleintes = new clientes();
+                instCleintes.insertarClientes(datosEntrada);
+                JOptionPane.showMessageDialog(this, "Ingresado exitosamente");
+            } catch (ClassNotFoundException | SQLException | InternalError | InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(ingresoClientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else{
             JOptionPane.showMessageDialog(rootPane, validacionCampos);
