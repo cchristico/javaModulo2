@@ -438,7 +438,14 @@ public class ingresoClientes extends javax.swing.JInternalFrame {
 
     private void txtApellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidoFocusLost
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "funciona");
+        if(!txtApellido.getText().trim().isEmpty())
+        {
+            validaciones val = new validaciones();
+            String cadena= val.reemplazarCaracteres(txtApellido.getText().trim());
+          
+            txtApellido.setText(cadena);
+          //  JOptionPane.showMessageDialog(this, cadena);
+        }
     }//GEN-LAST:event_txtApellidoFocusLost
 
     
