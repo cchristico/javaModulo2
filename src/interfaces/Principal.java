@@ -114,7 +114,12 @@ public class Principal extends javax.swing.JFrame {
 
         menuOrdenes.setText("ORDENES");
 
-        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.setText("Consulta Clientes");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         menuOrdenes.add(jMenuItem2);
 
         jMenuItem6.setText("jMenuItem6");
@@ -160,7 +165,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 468, Short.MAX_VALUE)
+            .addGap(0, 641, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,6 +196,15 @@ public class Principal extends javax.swing.JFrame {
         instIngresoClientes.setMaximizable(true);
         instIngresoClientes.setClosable(true);
     }//GEN-LAST:event_menuClientesActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        consultarCliente insCleinte = new consultarCliente();
+        this.add(insCleinte);
+        insCleinte.show();
+        insCleinte.setMaximizable(true);
+        insCleinte.setClosable(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments

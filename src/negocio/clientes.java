@@ -29,4 +29,10 @@ public class clientes {
          instMS.ejecutarSpModificacion(datos, constantes.SP_INSERTAR_CLIENTES);
     }
     
+    public ResultSet consultarCliente(String[] datos,String nombreStoreProcedure) throws ClassNotFoundException, SQLException, InternalError, InstantiationException, IllegalAccessException
+    {
+         MysqlConnect instMS =new MysqlConnect();
+         instMS.efectuarConexion();
+        return instMS.ejecutarSpConsulta(datos, nombreStoreProcedure);
+    }
 }
