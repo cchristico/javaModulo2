@@ -215,10 +215,62 @@ public class consultarCliente extends javax.swing.JInternalFrame {
                     }
                     break;
                 case "nombre":
+                    String[] datosN = {this.txtNombreCliente.getText().trim()};
+                     {
 
+                        try {
+                            rs = instCleinte.consultarCliente(datosN, constantes.SP_CONSULTAR_CLIENTE_NOMBRE);
+                            int i = 0;
+                            if(rs!=null)
+                            {
+                                 rs.last();
+                            modeloTabla.setNumRows(rs.getRow());
+                            rs.beforeFirst();
+                            while (rs.next()) {
+                                modeloTabla.setValueAt(rs.getString("identificacion"), i, 0);
+                                modeloTabla.setValueAt(rs.getString("nombre_cliente"), i, 1);
+                                modeloTabla.setValueAt(rs.getString("apellido_cliente"), i, 2);
+                                modeloTabla.setValueAt(rs.getString("telefonos"), i, 3);
+                                modeloTabla.setValueAt(rs.getString("correo_cliente"), i, 4);
+                                i++;
+                            }
+                            this.tblCleintes.setModel(modeloTabla);
+                            JOptionPane.showMessageDialog(rootPane, "Consulta Exitosa");
+                            }
+                        } catch (ClassNotFoundException | SQLException | InternalError | InstantiationException | IllegalAccessException ex) {
+                            System.out.println(ex);
+                        }
+                        
+                    }
                     break;
                 case "apellido":
+                    String[] datosA = {this.txtApellidoCliente1.getText().trim()};
+                     {
 
+                        try {
+                            rs = instCleinte.consultarCliente(datosA, constantes.SP_CONSULTAR_CLIENTE_APELLIDO);
+                            int i = 0;
+                            if(rs!=null)
+                            {
+                                 rs.last();
+                            modeloTabla.setNumRows(rs.getRow());
+                            rs.beforeFirst();
+                            while (rs.next()) {
+                                modeloTabla.setValueAt(rs.getString("identificacion"), i, 0);
+                                modeloTabla.setValueAt(rs.getString("nombre_cliente"), i, 1);
+                                modeloTabla.setValueAt(rs.getString("apellido_cliente"), i, 2);
+                                modeloTabla.setValueAt(rs.getString("telefonos"), i, 3);
+                                modeloTabla.setValueAt(rs.getString("correo_cliente"), i, 4);
+                                i++;
+                            }
+                            this.tblCleintes.setModel(modeloTabla);
+                            JOptionPane.showMessageDialog(rootPane, "Consulta Exitosa");
+                            }
+                        } catch (ClassNotFoundException | SQLException | InternalError | InstantiationException | IllegalAccessException ex) {
+                            System.out.println(ex);
+                        }
+                        
+                    }
                     break;
                 default:
                     break;

@@ -9,6 +9,9 @@ import entidades.TipoDocumento;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Random;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +26,7 @@ import utilidades.validaciones;
  * @author CEC
  */
 public class ingresoClientes extends javax.swing.JInternalFrame {
-
+private String identificacion;
     /**
      * Creates new form ingresoClientes
      */
@@ -154,7 +157,15 @@ public class ingresoClientes extends javax.swing.JInternalFrame {
         txtCodigo.setEditable(false);
 
         txtIdentificacion.setToolTipText("");
+        txtIdentificacion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtIdentificacionFocusLost(evt);
+            }
+        });
         txtIdentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIdentificacionKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIdentificacionKeyTyped(evt);
             }
@@ -476,6 +487,20 @@ public class ingresoClientes extends javax.swing.JInternalFrame {
           //  JOptionPane.showMessageDialog(this, cadena);
         }
     }//GEN-LAST:event_txtApellidoFocusLost
+
+    private void txtIdentificacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyPressed
+
+
+    }//GEN-LAST:event_txtIdentificacionKeyPressed
+
+    private void txtIdentificacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdentificacionFocusLost
+    Random rnd = new Random();
+    long time_start;
+    time_start = System.currentTimeMillis();
+
+    identificacion=txtIdentificacion.getText().substring(0,2)+txtIdentificacion.getText().substring(6)+String.valueOf(rnd.nextLong()*time_start).substring(5,11);
+    txtCodigo.setText(identificacion);
+    }//GEN-LAST:event_txtIdentificacionFocusLost
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

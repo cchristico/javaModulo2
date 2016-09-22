@@ -20,11 +20,12 @@ public class MysqlConnect {
     }
 
     public void efectuarConexion() throws ClassNotFoundException, SQLException, InternalError, InstantiationException, IllegalAccessException {
+        //"jdbc:mysql://localhost:3306/database?characterEncoding=latin2"
         String url = "jdbc:mysql://localhost:3306/";
         String dbName = "concesionario";
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
-        String password = "root";
+        String password = "";
         Class.forName(driver).newInstance();
         conexion = DriverManager.getConnection(url + dbName, userName, password);
 

@@ -114,7 +114,7 @@ public class Principal extends javax.swing.JFrame {
 
         menuOrdenes.setText("ORDENES");
 
-        jMenuItem2.setText("Consulta Clientes");
+        jMenuItem2.setText("Crear Orden");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -132,7 +132,12 @@ public class Principal extends javax.swing.JFrame {
 
         menuReportes.setText("REPORTES");
 
-        jMenuItem3.setText("jMenuItem3");
+        jMenuItem3.setText("Consultar Clientes");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         menuReportes.add(jMenuItem3);
 
         jMenuItem4.setText("jMenuItem4");
@@ -198,13 +203,17 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuClientesActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-        consultarCliente insCleinte = new consultarCliente();
-        this.add(insCleinte);
-        insCleinte.show();
-        insCleinte.setMaximizable(true);
-        insCleinte.setClosable(true);
+        ingresoOrden insOrden = new ingresoOrden();
+        this.add(insOrden);
+        insOrden.show();
+        insOrden.setMaximizable(true);
+        insOrden.setClosable(true);
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
